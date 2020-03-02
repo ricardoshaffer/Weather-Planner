@@ -9,7 +9,7 @@
 </head>
 <body>
     <form>
-        <input class="uk-input uk-form-width-medium uk-form-large" id="activitySearch" type="text" placeholder="Enter City">
+        <input class="uk-input uk-form-width-medium uk-form-large" id="activitySearch" type="text" placeholder="Enter state Code">
     </form>
     <script>
         document.addEventListener("keypress", function(event){
@@ -29,12 +29,12 @@ $.ajax({ //
     url: queryURL, 
     method: "GET"
 }).then(function(response){
-    console.log("current Weather Response: " + response);   
+    console.log("current NPS Response: " + response);   
 })
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
 
 
 
