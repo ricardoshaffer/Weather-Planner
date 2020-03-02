@@ -3,16 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/style.css">
-  
+    <link rel="stylesheet" href="assets/style.css" />
+  <!-- UIkit CSS -->    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.3/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.3/dist/js/uikit-icons.min.js"></script>
+    <!-- End UI Kit -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>Document</title>
+    <title>Weather</title>
+    <h1 class="uk-heading-divider uk-text-center">Weather Planner</h1>
 </head>
 <body>
+<div class="uk-container-large">
+    <div class="uk-column-1-2@m uk-column-divider">
+        <form>
+                <input class="uk-input uk-form-width-medium uk-form-large" id="citySearch" type="text" placeholder="Enter City">
+        </form>
+    <span class="uk-column-span">
+        <div id="time-events">
+            <table class="uk-table uk-table-responsive uk-table-divider">
+                <tbody>
+                    <tr id="weather-Forecast">
+                        <td></td>
+                    </tr>
+            </table>
+        </div>
+    </span>
+</div>
+
 <script src="assets/weather.js"></script>
 </body>
 </html>
