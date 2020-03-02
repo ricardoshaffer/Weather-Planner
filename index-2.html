@@ -20,19 +20,17 @@
         queryActivity = activityName.value;
 
 let limitResults = "&limit=50";
-let apiKey = "44fb755c-8c33-4429-82b9-23f69dbaada7";
-var settings = {
-  "url": "https://ridb.recreation.gov/api/v1/activities?query=fishing&limit=50&offset=0",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "apikey": "44fb755c-8c33-4429-82b9-23f69dbaada7",
-    "User-Agent": "PostmanRuntime/7.22.0",
-    "Accept": "*/*",
-    "Cache-Control": "no-cache",
-    "Host": "ridb.recreation.gov"
-  },
-};
+let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+let queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode="+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+
+//var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
+    
+$.ajax({ //
+    url: queryURL, 
+    method: "GET"
+}).then(function(response){
+    console.log("current Weather Response: " + response);   
+})
 
 $.ajax(settings).done(function (response) {
   console.log(response);
