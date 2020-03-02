@@ -22,16 +22,16 @@
 let limitResults = "&limit=50";
 let apiKey = "44fb755c-8c33-4429-82b9-23f69dbaada7";
 var settings = {
-  "url": "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&offset=0", //&apikey=" +apiKey,
+  "url": "https://ridb.recreation.gov/api/v1/activities?query=fishing&limit=50&offset=0&apikey=44fb755c-8c33-4429-82b9-23f69dbaada7",
   "method": "GET",
   "timeout": 0,
   "headers": {
     "apikey": "44fb755c-8c33-4429-82b9-23f69dbaada7",
-    "Transfer-Encoding": "chunked",
-    "Connection": "keep-alive",
-    "Content-Type": "application/json",
-    "X-Frame-Options": "SAMEORIGIN",
-    "Strict-Transport-Security": "max-age=31536000; includeSubdomains; always"
+    "User-Agent": "PostmanRuntime/7.22.0",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Host": "ridb.recreation.gov",
+    "Accept-Encoding": "gzip, deflate, br"
   },
 };
 
