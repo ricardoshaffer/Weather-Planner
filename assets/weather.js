@@ -9,21 +9,35 @@ console.log(queryCity);
 let apiKey = "&appid=fb68c99f07b370fbd902b21d6ce4f201";
 let daysReq = "16";
 let unitDisplay = "&units=Imperial"
-let queryURL = "//api.openweathermap.org/data/2.5/forecast?q=" + queryCity + "&cnt="+ daysReq + apiKey + unitDisplay;
+let queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + queryCity + "&cnt="+ daysReq + apiKey + unitDisplay;
+let currentQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + queryCity + apiKey;
 let dateEvent;
          //document.write("getDay() : " + dt.getDay() ); 
 
-$.ajax({
-    url: queryURL,
+
+ /////////CURRENT WEATHER ///////////////
+
+    
+ $.ajax({ //
+    url: currentQueryURL, 
     method: "GET"
 }).then(function(response){
-    console.log(response);
+    console.log("current Weather Response: " + response);   
+})
+
+//////// FORECAST WEATHER //////////
+
+$.ajax({
+    url: queryURL , currentQueryURL,
+    method: "GET"
+}).then(function(response){
+    console.log("forecast response: "+response);
 
 
     $(cityName).text(response.city.name).prepend("weather in ");
     for( i = 0; i < response.list.length; i++){
     let iconEvent = response.list[i].weather[0].icon;
-    let weatherIcon = "//openweathermap.org/img/wn/" + iconEvent + "@2x.png";
+    let weatherIcon = "http://openweathermap.org/img/wn/" + iconEvent + "@2x.png";
     let timeEvent = response.list[i].dt_txt;
     let dayinWeek;
     function date() {
@@ -48,18 +62,24 @@ $.ajax({
     let dateHolder = document.getElementsByTagName("td");
     
     let weatherCard = document.createElement("div");
-        weatherCard.setAttribute("class","uk-card uk-card-primary uk-card-body");
+        weatherCard.setAttribute("class","card text-white bg-primary mb-3");
     let dayofWeek = document.createElement("div");
-        dayofWeek.setAttribute("class","uk-card-title");
-        $(dayofWeek).text(dayinWeek);
+        dayofWeek.setAttribute("class","card-title");
+        $(dayofWeek).text(dayinWeek+ " , "+ timeEvent);
+        let iconHolder = document.createElement("img");
+        $(iconHolder).attr("src", weatherIcon);
+        let weatherHolder = document.createElement("p");
+        $(weatherHolder).attr("class","card-text");
+        $(weatherHolder).text("temperature : " + hourlyWeather + ", " + weatherDescription);
+        $(weatherHolder).append(iconHolder);
+        $(weatherHolder).append(weatherCard);
+        $(weatherCard).append(dayofWeek);
     $(dateHolder).append(weatherCard);
-    $(weatherCard).append(dayofWeek);
-    let weatherHolder = document.createElement("div");
-    let iconHolder = document.createElement("img");
-    $(weatherHolder).text("temperature : " + hourlyWeather + ", " + weatherDescription);
-    $(weatherHolder).prepend(iconHolder);
-    $(iconHolder).attr("src", weatherIcon);
     
+    
+
+
+
     
     
     
