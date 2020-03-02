@@ -9,7 +9,7 @@ console.log(queryCity);
 let apiKey = "&appid=fb68c99f07b370fbd902b21d6ce4f201";
 let daysReq = "16";
 let unitDisplay = "&units=Imperial"
-let queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + queryCity + "&cnt="+ daysReq + apiKey + unitDisplay;
+let queryURL = "//api.openweathermap.org/data/2.5/forecast?q=" + queryCity + "&cnt="+ daysReq + apiKey + unitDisplay;
 let dateEvent;
          //document.write("getDay() : " + dt.getDay() ); 
 
@@ -23,7 +23,7 @@ $.ajax({
     $(cityName).text(response.city.name).prepend("weather in ");
     for( i = 0; i < response.list.length; i++){
     let iconEvent = response.list[i].weather[0].icon;
-    let weatherIcon = "http://openweathermap.org/img/wn/" + iconEvent + "@2x.png";
+    let weatherIcon = "//openweathermap.org/img/wn/" + iconEvent + "@2x.png";
     let timeEvent = response.list[i].dt_txt;
     let dayinWeek;
     function date() {
