@@ -28,10 +28,10 @@ let queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode="+ queryA
 $.ajax({ //
     url: queryURL, 
     method: "GET"
-}).then(function(response){
+}).then(function npsResponse(response){
     console.log("current NPS Response: " + response);   
 })
-
+console.log(npsResponse);
 // $.ajax(settings).done(function (response) {
 //   console.log(response);
 // });
