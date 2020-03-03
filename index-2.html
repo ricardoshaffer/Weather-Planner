@@ -11,37 +11,94 @@
 </head>
 <body>
     <div id="map" style="width: 100%; height: 530px;"></div>
+    <p id="mapperID"></p>
     <form>
         <input class="uk-input uk-form-width-medium uk-form-large" id="activitySearch" type="text" placeholder="Enter state Code">
     </form>
     <script>
+        getLocation();
+let locatorText = document.getElementById("mapperID");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    locatorText.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
 
-        $.get('https://ipapi.co/ip/', function(data){
-            let ipFetched = data;
-            console.log(ipFetched);
-            let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
-        $.getJSON(ipEmbed, function(data){
-            let ipTrace = data;
-            console.log(ipTrace);
-            locationLat = ipTrace.latitude
-            locationLong = ipTrace.longitude;
-            console.log("locationLatitude: " + locationLat + " , " + "locationLongitude: " + locationLong)
-                    ///// MAPQUEST TRIAL RUN ///////////////
+function showPosition(position) {
+    locatorText.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
 
-      function mapLoaded() {
         L.mapquest.key = 'm6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO';
-
         let map = L.mapquest.map('map', {
-          center: [locationLat, locationLong],
+          center: [position.coords.latitude, position.coords.longitude],
           layers: L.mapquest.tileLayer('map'),
           zoom: 14
         });
-        L.marker([locationLat, locationLong], {
+        L.marker([position.coords.latitude, position.coords.longitude], {
           icon: L.mapquest.icons.marker(),
           draggable: false
         }).bindPopup('You').addTo(map);
-    }
-        mapLoaded();
+}
+
+
+
+
+
+//         let lococo = document.getElementById("maplocation");
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     lococo.innerHTML = "Geolocation is not supported by this browser.";
+//   }
+// }
+
+// function showPosition(position) {
+//     lococo.innerHTML = "Latitude: " + position.coords.latitude +
+//   "<br>Longitude: " + position.coords.longitude;
+//     function mapLoaded(){
+//         L.mapquest.key = 'm6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO';
+//         let map = L.mapquest.map('map', {
+//           center: [position.coords.latitude, position.coords.longitude],
+//           layers: L.mapquest.tileLayer('map'),
+//           zoom: 14
+//         });
+//         L.marker([position.coords.latitude, position.coords.longitude], {
+//           icon: L.mapquest.icons.marker(),
+//           draggable: false
+//         }).bindPopup('You').addTo(map);
+//     }
+// }
+
+
+        // $.get('https://ipapi.co/ip/', function(data){
+        //     let ipFetched = data;
+        //     console.log(ipFetched);
+        //     let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
+        // $.getJSON(ipEmbed, function(data){
+        //     let ipTrace = data;
+        //     console.log(ipTrace);
+        //     locationLat = ipTrace.latitude
+        //     locationLong = ipTrace.longitude;
+        //     console.log("locationLatitude: " + locationLat + " , " + "locationLongitude: " + locationLong)
+        //             ///// MAPQUEST TRIAL RUN ///////////////
+
+    //   function mapLoaded() {
+    //     L.mapquest.key = 'm6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO';
+
+    //     let map = L.mapquest.map('map', {
+    //       center: [locationLat, locationLong],
+    //       layers: L.mapquest.tileLayer('map'),
+    //       zoom: 14
+    //     });
+    //     L.marker([locationLat, locationLong], {
+    //       icon: L.mapquest.icons.marker(),
+    //       draggable: false
+    //     }).bindPopup('You').addTo(map);
+    // }
+    //     mapLoaded();
 
 
 
@@ -58,74 +115,74 @@
 
 
 
-})})
-        document.addEventListener("keypress", function(event){
-    if(event.key === 'Enter' || event.key === 'Return'){
-        event.preventDefault();
-        let activityName = document.getElementById("activitySearch");
-        let textBox = document.querySelector("#activitySearch");
-        queryActivity = activityName.value;
+// })})
+//         document.addEventListener("keypress", function(event){
+//     if(event.key === 'Enter' || event.key === 'Return'){
+//         event.preventDefault();
+//         let activityName = document.getElementById("activitySearch");
+//         let textBox = document.querySelector("#activitySearch");
+//         queryActivity = activityName.value;
 
-let limitResults = "&limit=50";
-let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
-let queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode="+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+// let limitResults = "&limit=50";
+// let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+// let queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode="+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
 
-//var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
+// //var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
     
-$.ajax({ //
-    url: queryURL, 
-    method: "GET"
-}).then(function(response){
-    let npsResponse = response;
-    console.log(npsResponse);
-    for(entry=0; entry < 10; entry++){
-        parkTitle = npsResponse.data[entry].name;
-        parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
-        if(parkLatLong != ''){
-        parkLatLong = parkLatLong.split(',');
-        parkLat = (parkLatLong[0])
-        let parkLatClean = parkLat.replace("lat:", "");
-        parkLong = (parkLatLong[1])
-        let parkLongClean = parkLong.replace("lng:", "");
-        console.log("parkTitle response: " + parkTitle+ ", latLong: "+ parkLatLong + "parkLatClean: "+ parkLatClean + ", parkLongClean: "+ parkLongClean);
-    mapKey = ("https://www.mapquestapi.com/search/v4/place?location=" + parkLongClean + "%2C" + parkLatClean + "&sort=distance&feedback=false&key=m6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO&q=coffee");
-    console.log("mapKey: "+mapKey);
-    $.ajax({
-    url: mapKey,
-    method: "GET"
-}).then(function(response){
-    let mapQResponse = response;
-    console.log(mapQResponse)
-})
-    }
-    }
+// $.ajax({ //
+//     url: queryURL, 
+//     method: "GET"
+// }).then(function(response){
+//     let npsResponse = response;
+//     console.log(npsResponse);
+//     for(entry=0; entry < 10; entry++){
+//         parkTitle = npsResponse.data[entry].name;
+//         parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
+//         if(parkLatLong != ''){
+//         parkLatLong = parkLatLong.split(',');
+//         parkLat = (parkLatLong[0])
+//         let parkLatClean = parkLat.replace("lat:", "");
+//         parkLong = (parkLatLong[1])
+//         let parkLongClean = parkLong.replace("lng:", "");
+//         console.log("parkTitle response: " + parkTitle+ ", latLong: "+ parkLatLong + "parkLatClean: "+ parkLatClean + ", parkLongClean: "+ parkLongClean);
+//     mapKey = ("https://www.mapquestapi.com/search/v4/place?location=" + parkLongClean + "%2C" + parkLatClean + "&sort=distance&feedback=false&key=m6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO&q=coffee");
+//     console.log("mapKey: "+mapKey);
+//     $.ajax({
+//     url: mapKey,
+//     method: "GET"
+// }).then(function(response){
+//     let mapQResponse = response;
+//     console.log(mapQResponse)
+// })
+//     }
+//     }
 
-    }
-)
-// $.ajax(settings).done(function (response) {
-//   console.log(response);
-// });
+//     }
+// )
+// // $.ajax(settings).done(function (response) {
+// //   console.log(response);
+// // });
 
 
 
 
         
-    //     console.log(queryActivity);
+//     //     console.log(queryActivity);
 
-    //     $.ajax({
-    //     url: queryURL,
-    //     beforeSend: function(xhr) {
-    //          xhr.setRequestHeader("apikey", apiKey)
-    //     }, success: function(data){
-    //         alert(data);
-    //         //process the JSON data etc
-    //     },
-    //     method: "GET"
-    //     ,then: function(response){
-    // console.log("current activity Response: " + response);
-    //     }})
-    // }
-    }})
+//     //     $.ajax({
+//     //     url: queryURL,
+//     //     beforeSend: function(xhr) {
+//     //          xhr.setRequestHeader("apikey", apiKey)
+//     //     }, success: function(data){
+//     //         alert(data);
+//     //         //process the JSON data etc
+//     //     },
+//     //     method: "GET"
+//     //     ,then: function(response){
+//     // console.log("current activity Response: " + response);
+//     //     }})
+//     // }
+//     }})
     </script>
 </body>
 </html>
