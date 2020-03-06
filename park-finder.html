@@ -86,12 +86,12 @@
   $("#location-finder").on("click", function(event) {
     event.preventDefault();
 /// PROMPTS FOR PERMISSION TO USE PERMISSION /////
+let locatorText = document.getElementById("mapperID");
   getLocation();
-  let locatorText = document.getElementById("mapperID");
   function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
     locatorText.innerHTML = "Geolocation is not supported by this browser.";
     }
   }
@@ -100,6 +100,18 @@
       locatorText.innerHTML = "Latitude: " + position.coords.latitude + 
       "<br>Longitude: " + position.coords.longitude;
       console.log("the position: " + position);
+      if (position == null || position == false){
+        $.get('https://ipapi.co/ip/', function(data){
+            let ipFetched = data;
+            console.log(ipFetched);
+            let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
+        $.getJSON(ipEmbed, function(data){
+            let ipTrace = data;
+            console.log(ipTrace);
+            position.coords.latitude = ipTrace.latitude;
+            position.coords.longitude = ipTrace.longitude;
+      })
+    })}
       let activityName = document.getElementById("activitySearch");
       let textBox = document.querySelector("#activitySearch");  
       //stateSearch = activityName.value;
