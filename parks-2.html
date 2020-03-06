@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>     
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css"/> 
+    <title>Document</title>
+</head>
+<body>
+    <div id="map" style="width: 80%; height: 450px;"></div>
+    <p id="mapperID"></p>
+    <form>
+        <input class="uk-input uk-form-width-medium uk-form-large" id="activitySearch" type="text" placeholder="Enter state Code">
+    </form>
+    <script>
+
+//// SECION FOR THE EVENT LISTENER FOR KEYPRESS //////
+        document.addEventListener("keypress", function(event){
+    if(event.key === 'Enter' || event.key === 'Return'){
+        event.preventDefault();
+
+        /// PROMPTS FOR PERMISSION TO USE PERMISSION /////
+        getLocation();
+let locatorText = document.getElementById("mapperID");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    locatorText.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+        //// gets the address of the user by permission ///
+        function showPosition(position) {
+    locatorText.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+  console.log("the position: " + position);
+        let activityName = document.getElementById("activitySearch");
+        let textBox = document.querySelector("#activitySearch");  
+        stateSearch = activityName.value;
+// gets state for NPS api
+        $.get('https://ipapi.co/ip/', function(data){
+            let ipFetched = data;
+            console.log(ipFetched);
+            let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
+        $.getJSON(ipEmbed, function(data){
+            let ipTrace = data;
+            console.log(ipTrace);
+            stateLocation = ipTrace.region_code;
+            console.log("state location: "+ stateLocation);
+
+let limitResults = "&limit=50";
+let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+let queryURL = "https://developer.nps.gov/api/v1/parks?stateCode="+ stateLocation +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+//// geneerates a mapquest map utilizing the lat & long of the user ///
+L.mapquest.key = 'm6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO';
+        let map = L.mapquest.map('map', {
+          center: [position.coords.latitude, position.coords.longitude],
+          layers: L.mapquest.tileLayer('map'),
+          zoom: 14
+        });
+        L.marker([position.coords.latitude, position.coords.longitude], {
+          icon: L.mapquest.icons.marker(),
+          draggable: false
+        }).addTo(map);
+        //map.addControl(L.mapquest.locatorControl());
+//var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
+    
+$.ajax({ //
+    url: queryURL, 
+    method: "GET"
+}).then(function(response){
+    let npsResponse = response;
+    console.log(npsResponse);
+    for(entry=0; entry < 10; entry++){
+        parkTitle = npsResponse.data[entry].fullName;
+        parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
+        if(parkLatLong != ''){
+        parkLatLong = parkLatLong.split(',');
+        parkLat = (parkLatLong[0])
+        let parkLatClean = parkLat.replace("lat:", "");
+        parkLong = (parkLatLong[1])
+        let parkLongClean = parkLong.replace("long:", "");
+
+/// adds marker to the map for current locations ///
+L.marker([parkLatClean, parkLongClean], {
+          icon: L.mapquest.icons.marker(),
+          draggable: false
+        }).addTo(map);
+
+
+//distance//
+function distanceMeasurement (){
+    let radlat1 = Math.PI * (position.coords.latitude)/180;
+    let radlat2 = Math.PI * parkLatClean/180;
+    let theta =  position.coords.longitude - parkLongClean;
+    //console.log("distance long 1: " + position.coords.longitude + "distance lat 2: "+ parkLatClean);
+    let radtheta = Math.PI * theta/180;
+		let distOne = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(distOne);
+		distTwo = dist * 180/Math.PI;
+    distUnitless = distTwo * 60 * 1.1515;
+    
+    distKM = distUnitless * 1.609344;
+    distMiles = (distKM / 1.6093444);
+    console.log("the distanvce in miles: " + distMiles);
+    return distMiles;
+    
+}
+distanceMeasurement();
+    console.log("parkTitle response: " + parkTitle+ ",distance in miles from current location: "+ distMiles);
+//     mapKey = ("https://www.mapquestapi.com/search/v4/place?location=" + parkLongClean + "%2C" + parkLatClean + "&sort=distance&feedback=false&key=m6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO&q=coffee");
+//     console.log("mapKey: "+mapKey);
+//     $.ajax({
+//     url: mapKey,
+//     method: "GET"
+// }).then(function(response){
+//     let mapQResponse = response;
+//     console.log(mapQResponse)
+// })
+    }}})
+    })})
+
+          }}
+        })
+</script>
+</body>
+</html>

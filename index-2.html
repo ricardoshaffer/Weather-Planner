@@ -116,49 +116,49 @@ function showPosition(position) {
 
 
 // })})
-//         document.addEventListener("keypress", function(event){
-//     if(event.key === 'Enter' || event.key === 'Return'){
-//         event.preventDefault();
-//         let activityName = document.getElementById("activitySearch");
-//         let textBox = document.querySelector("#activitySearch");
-//         queryActivity = activityName.value;
+        document.addEventListener("keypress", function(event){
+    if(event.key === 'Enter' || event.key === 'Return'){
+        event.preventDefault();
+        let activityName = document.getElementById("activitySearch");
+        let textBox = document.querySelector("#activitySearch");
+        queryActivity = activityName.value;
 
-// let limitResults = "&limit=50";
-// let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
-// let queryURL = "https://developer.nps.gov/api/v1/campgrounds?stateCode="+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+let limitResults = "&limit=50";
+let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+let queryURL = "https://developer.nps.gov/api/v1/places?stateCode"+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
 
-// //var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
+//var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
     
-// $.ajax({ //
-//     url: queryURL, 
-//     method: "GET"
-// }).then(function(response){
-//     let npsResponse = response;
-//     console.log(npsResponse);
-//     for(entry=0; entry < 10; entry++){
-//         parkTitle = npsResponse.data[entry].name;
-//         parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
-//         if(parkLatLong != ''){
-//         parkLatLong = parkLatLong.split(',');
-//         parkLat = (parkLatLong[0])
-//         let parkLatClean = parkLat.replace("lat:", "");
-//         parkLong = (parkLatLong[1])
-//         let parkLongClean = parkLong.replace("lng:", "");
-//         console.log("parkTitle response: " + parkTitle+ ", latLong: "+ parkLatLong + "parkLatClean: "+ parkLatClean + ", parkLongClean: "+ parkLongClean);
-//     mapKey = ("https://www.mapquestapi.com/search/v4/place?location=" + parkLongClean + "%2C" + parkLatClean + "&sort=distance&feedback=false&key=m6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO&q=coffee");
-//     console.log("mapKey: "+mapKey);
-//     $.ajax({
-//     url: mapKey,
-//     method: "GET"
-// }).then(function(response){
-//     let mapQResponse = response;
-//     console.log(mapQResponse)
-// })
-//     }
-//     }
+$.ajax({ //
+    url: queryURL, 
+    method: "GET"
+}).then(function(response){
+    let npsResponse = response;
+    console.log(npsResponse);
+    for(entry=0; entry < 10; entry++){
+        parkTitle = npsResponse.data[entry].name;
+        parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
+        if(parkLatLong != ''){
+        parkLatLong = parkLatLong.split(',');
+        parkLat = (parkLatLong[0])
+        let parkLatClean = parkLat.replace("lat:", "");
+        parkLong = (parkLatLong[1])
+        let parkLongClean = parkLong.replace("lng:", "");
+        console.log("parkTitle response: " + parkTitle+ ", latLong: "+ parkLatLong + "parkLatClean: "+ parkLatClean + ", parkLongClean: "+ parkLongClean);
+    mapKey = ("https://www.mapquestapi.com/search/v4/place?location=" + parkLongClean + "%2C" + parkLatClean + "&sort=distance&feedback=false&key=m6r48gcKnaiZ5cS9fynPUC8mEcXnoOjO&q=coffee");
+    console.log("mapKey: "+mapKey);
+    $.ajax({
+    url: mapKey,
+    method: "GET"
+}).then(function(response){
+    let mapQResponse = response;
+    console.log(mapQResponse)
+})
+    }
+    }
 
-//     }
-// )
+    }
+)
 // // $.ajax(settings).done(function (response) {
 // //   console.log(response);
 // // });
