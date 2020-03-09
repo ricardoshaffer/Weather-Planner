@@ -20,8 +20,8 @@ As a user, enter city(ies) to search the weather for 5 days, and get back the fo
 
 ## Credits
 
-- Weather API: Built using __OpenWeatherAPI__, http://openweathermap.org
-- Framework: Built using __UIKit__, version 3.3.3. https://getuikit.com, free version.
+- Weather API: Built using __WeatherBit.I)__, https://weatherbit.io/, version 3.3.3
+- Framework: Built using __UIKit__, version 3.3.3. https://GetBootstrap.com, free version.
 - __JQuery__ version 3.4.1.
 
 ## License
