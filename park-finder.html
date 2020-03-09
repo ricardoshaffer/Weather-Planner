@@ -149,6 +149,8 @@ let locatorText = document.getElementById("mapperID");
     let npsResponse = response;
     console.log(npsResponse);
     for(entry=0; entry < 10; entry++){
+
+ /// PARK INFORMATION FOR MAP POPULATION ///
         parkTitle = npsResponse.data[entry].fullName;
         parkLatLong = (npsResponse.data[entry].latLong).replace("{", "").replace("}","");
         if(parkLatLong != ''){
@@ -157,6 +159,7 @@ let locatorText = document.getElementById("mapperID");
         let parkLatClean = parkLat.replace("lat:", "");
         parkLong = (parkLatLong[1])
         let parkLongClean = parkLong.replace("long:", "");
+        $(parkTitle).attr("class", "modal-button");
 /// adds marker to the map for 'X' AMOUNT OF LOCATIONS FROM NPS FOR THE STATE ///
 L.marker([parkLatClean, parkLongClean], {
           icon: L.mapquest.icons.marker({
@@ -166,8 +169,7 @@ L.marker([parkLatClean, parkLongClean], {
             secondaryColor: '#a4bab7'
           }),
           draggable: false
-        }).addTo(map);
-
+        }).bindPopup(parkTitle).addTo(map);
 
 //CALCULATES THE DISTANCE FROM THE USER'S LOCATION TO THAT OF THE NPS LOCATION USING LAT & LONG//
 function distanceMeasurement (){
@@ -189,7 +191,54 @@ function distanceMeasurement (){
     
 }
 distanceMeasurement();
+ /// SECTION TO AUTO FILL CONTACT INFORMATION ////
+        fullName = response.data[entry].fullName;
+        contactEmail = response.data[entry].contacts["emailAddresses"][0].emailAddress;
+        contactPhone = response.data[entry].contacts.phoneNumbers[0].phoneNumber;
+        directionInfo=response.data[entry].directionsInfo;
+        directionURL=response.data[entry].directionsUrl;
+        standardHoursMonday=response.data[entry].operatingHours[0].standardHours.monday;
+        standardHoursTuesday=response.data[entry].operatingHours[0].standardHours.tuesday;
+        standardHoursWednesday=response.data[entry].operatingHours[0].standardHours.wednesday;
+        standardHoursThursday=response.data[entry].operatingHours[0].standardHours.thursday;
+        standardHoursFriday=response.data[entry].operatingHours[0].standardHours.friday;
+        standardHoursSaturday=response.data[entry].operatingHours[0].standardHours.saturday;
+        standardHoursSunday=response.data[entry].operatingHours[0].standardHours.sunday;
+        latitude=response.data[entry].latitude;
+        longitude=response.data[entry].longitude;
+        description = response.data[entry].description;
+        addressType1=response.data[entry].addresses[0].type;
+        addressType2=response.data[entry].addresses[1].type;
+    console.log("address type 1 response: " + addressType1 + ", address type 2 response: " + addressType2);
+        // determine these based on the result from determinePhysical -> use this as the index
+        //// ALEX CODE TO DETERMINE WHICH ADDRESS TO POPULATE ////
+function determinePhysical() {
+            if (addressType1 == "Physical") {
+                addressVar= 0;
+            } else {
+                addressVar= 1;
+                }
+    }
+    determinePhysical();
+        addressLine1=response.data[entry].addresses[addressVar].line1;
+        addressLine2=response.data[entry].addresses[addressVar].line2;
+        addressLine3=response.data[entry].addresses[addressVar].line3;
+        addressCity=response.data[entry].addresses[addressVar].city;
+        addressZip=response.data[entry].addresses[addressVar].postalCode;
+        addressState=response.data[entry].addresses[addressVar].stateCode;
+    console.log("address 1: " + addressLine1 + " address 2: " + addressLine2);
     console.log("parkTitle response: " + parkTitle+ ",distance in miles from current location: "+ distMiles);
+    
+$(parkTitle).on("click", function(event) {
+    event.preventDefault();
+            let modalMain = document.createElement("div").attr("class", "modal");
+            parkName = parkTitle;
+            let modalTitle = document.createElement("p").attr("class","modal-card-title");
+            $(".modal-card-title").text(parkName);
+           let modalBody =  document.createElement("section").attr("class", "modal-card-body");
+            $(modelMail).append(modalTitle).append(modalBody);
+          })
+
           }
         }
   })

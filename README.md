@@ -8,6 +8,7 @@ As a user, enter city(ies) to search the weather for 5 days, and get back the fo
 - city is then stored locally and appended to a list as a value.
 - weather API utilizes the city, as it is entered or the list item as it is clicked, to render weather.
 - javascript compiles the weather, appends icon code, and presents the current & forecasted weather.
+- Images utilize 'weather description' as alt tags to increase accessibility.
 
 ## File Structure
 

@@ -1,0 +1,58 @@
+.boxshadow {
+    box-shadow: -6px -6px 26px 0 rgba(255,255,255,0.83), 6px 6px 16px 0 rgba(207, 200, 217, 0.51);
+}
+.header-box {
+    background-color: #ffffff;
+    border: 1px solid rgba(255,255,255, 0.2);
+    border-radius: 12px;
+    font-family: 'Didactic Gothic', Arial, Helvetica, sans-serif;
+    color: #3a2041;
+}
+body {
+    background-color: #efeeee !important;
+}
+.cardboxshadow {
+    box-shadow: -3px -3px 15px 0 rgba(255,255,255,0.83), 3px 3px 8px 0 rgba(161, 189, 164, 0.51);
+}
+.card-box {
+    background-color: #63ebcd;
+    border: 1px solid rgba(255,255,255, 0.2);
+    border-radius: 12px;
+    font-family: 'Didactic Gothic', Arial, Helvetica, sans-serif;
+    color: #3a2041;
+}
+
+.inset-box {
+    -moz-box-shadow: inset -3px 3px 10px 0 rgba(255, 255, 255, 0.83);
+    -moz-box-shadow: inset 3px -3px 8px -2px rgba(139, 133, 103, 0.35);
+    -webkit-box-shadow: inset -3px 3px 10px 0 rgba(255, 255, 255, 0.83);
+    -webkit-box-shadow: inset 3px -3px 8px -2px rgba(139, 133, 103, 0.35);
+    box-shadow: inset -3px 3px 10px 0 rgba(255, 255, 255, 0.83);
+    box-shadow: inset 3px -3px 8px -2px rgba(139, 133, 103, 0.35);
+}
+.card {
+    background-color: #faf4f0 !important;
+    border: 1px solid rgba(255,255,255, 0.1) !important;
+    color: #214670 !important;
+}
+.card-header {
+    background-color: #574c86 !important;
+    color: #ffffff;
+    -moz-box-shadow: inset -3px 3px 5px 0 rgba(119, 97, 138, 0.83);
+    -webkit-box-shadow: inset -3px 3px 5px 0 rgba(143, 90, 187, 0.83);
+    box-shadow: inset -4px 4px 6px -2px rgba(157, 131, 165, 0.33);
+}
+.card-text img {
+    background-image: radial-gradient(circle, rgba(173, 183, 230,0.8), rgba(201, 226, 247, 0.2), rgba(255,255,255,0.0));
+    /* background-color: lightblue; */
+}
+.list-group-item.active{
+    background-color: #574c86 !important;
+    border: 1px solid rgba(255,255,255, 0.2) !important;
+    -moz-box-shadow: inset -3px -3px 6px 0 rgba(255, 255, 255, 0.83);
+    -moz-box-shadow: inset 3px -3px 8px -2px rgba(105, 102, 134, 0.45);
+    -webkit-box-shadow: -3px -3px 6px 0 rgba(255, 255, 255, 0.83);
+    -webkit-box-shadow: inset 3px -3px 4px 1px rgba(46, 42, 80, 0.45);
+    box-shadow: inset -2px -2px 8px px rgba(165, 150, 196, 0.53), inset 3px 3px 3px 2px rgba(28, 23, 70, 0.35);
+
+}

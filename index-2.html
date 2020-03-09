@@ -73,15 +73,15 @@ function showPosition(position) {
 // }
 
 
-        // $.get('https://ipapi.co/ip/', function(data){
-        //     let ipFetched = data;
-        //     console.log(ipFetched);
-        //     let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
-        // $.getJSON(ipEmbed, function(data){
-        //     let ipTrace = data;
-        //     console.log(ipTrace);
-        //     locationLat = ipTrace.latitude
-        //     locationLong = ipTrace.longitude;
+        $.get('https://ipapi.co/ip/', function(data){
+            let ipFetched = data;
+            console.log(ipFetched);
+            let ipEmbed = "https://ipapi.co/" + ipFetched + "/json/";
+        $.getJSON(ipEmbed, function(data){
+            let ipTrace = data;
+            console.log(ipTrace);
+            locationLat = ipTrace.latitude
+            locationLong = ipTrace.longitude;
         //     console.log("locationLatitude: " + locationLat + " , " + "locationLongitude: " + locationLong)
         //             ///// MAPQUEST TRIAL RUN ///////////////
 
@@ -125,7 +125,7 @@ function showPosition(position) {
 
 let limitResults = "&limit=50";
 let apiKey = "C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
-let queryURL = "https://developer.nps.gov/api/v1/places?stateCode"+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
+let queryURL = "https://developer.nps.gov/api/v1/parks?stateCode="+ queryActivity +"&limit=5&api_key=C20X2gP148EDeslk7stqM8BU6u6WmOqbAdPeKG8C";
 
 //var queryURL = "https://ridb.recreation.gov/api/v1/activities?query=" + queryActivity + limitResults + "&limit=5&api_key=" +apiKey;
     
