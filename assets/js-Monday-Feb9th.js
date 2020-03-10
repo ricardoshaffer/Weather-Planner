@@ -68,8 +68,6 @@ document.addEventListener("keypress", function(event){
         let cityName = document.getElementById("citySearch");
         queryCity = cityName.value;
     console.log("searched city: " + queryCity);
-
-
 // When form is submitted...
   var todoText = todoInput.value.trim();
 
@@ -87,12 +85,19 @@ document.addEventListener("keypress", function(event){
   renderTodos();
 
 /// END OF FORM CREATION ///
-
+let currentApiKey = "&appid=fb68c99f07b370fbd902b21d6ce4f201";
+let currentunitDisplay = "&units=Imperial"
     let apiKey = "&key=bb0e6846266e46b2a313d522b2b4d2dd";
     let daysReq = "16";
     let unitDisplay = "&units=I"
     let queryURL = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + queryCity + "&country=US"+ unitDisplay + apiKey;
-    //let currentQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + queryCity + apiKey;
+    let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + queryCity + currentunitDisplay + currentApiKey;
+    $.ajax({
+        url: currentQueryURL,
+        method: "GET" 
+    }).then(function(response){
+        console.log(response)
+    })
 $.ajax({
     url: queryURL,
     method: "GET" 
@@ -151,8 +156,8 @@ $("#title-" +[fore]).text(weatherDescription);
 }})
 // When a element inside of the todoList is clicked...
 todoList.addEventListener("click", function(event) {
+    $(".image").attr("src", "");
     var element = event.target;
-  
     // If that element is a button...
     if (element.matches("button") === true) {
       // Get its data-index value and remove the todo element from the list
@@ -160,12 +165,21 @@ todoList.addEventListener("click", function(event) {
       console.log(locationSearched);
 
       queryCity = locationSearched;
+      let currentApiKey = "&appid=fb68c99f07b370fbd902b21d6ce4f201";
+      let currentunitDisplay = "&units=Imperial"
       console.log("previously searched city: " + queryCity);
       let apiKey = "&key=bb0e6846266e46b2a313d522b2b4d2dd";
       let daysReq = "16";
       let unitDisplay = "&units=I"
       let queryURL = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + queryCity + "&country=US"+ unitDisplay + apiKey;
-  $.ajax({
+      let currentQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + queryCity + currentunitDisplay + currentApiKey;
+      $.ajax({
+        url: currentQueryURL,
+        method: "GET" 
+    }).then(function(response){
+        console.log(response)
+    })
+      $.ajax({
       url: queryURL,
       method: "GET" 
   }).then(function(response){
