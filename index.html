@@ -8,87 +8,88 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
     <title>Weather</title>
-    <h1 class="uk-heading-divider uk-text-center">Weather Planner</h1>
 </head>
 <body>
-   
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <form>
+        <div class="jumbotron jumbotron-fluid header-box">
+            <div class="container boxshadow">
+              <h1 class="display-4">weather planner</h1>
+              <p class="lead">5-day daily average forecast.</p>
+              <input class="form-control form-control-lg" type="text"  id="citySearch" placeholder="Enter City">
+              <!-- <form>
                 <input class="uk-input uk-form-width-medium uk-form-large" id="citySearch" type="text" placeholder="Enter City">
-            </form>
-        </div>
-        <div class="col-md-9">
-            <h2>Current weather</h2>
-            <div id="currentWeather"></div>
-
-        </div>
-    </div>
-        <div>
-            <div id="time-events">
-                <table class="uk-table uk-table-responsive uk-table-divider">
-                    <tbody>
-                        <tr id="weather-Forecast">
-                            <td></td>
-                        </tr>
-                </table>
+            </form> -->
             </div>
-        </div>
-    
-</div>
-    
-    <!-- <div class="uk-container uk-container-small">
-        <form>
-            <input class="uk-input uk-form-width-medium uk-form-large" id="citySearch" type="text" placeholder="Enter City">
-        </form>
-    </div>
-    </div>
-    <div class="uk-section">
-        <div class="uk-container">
-            <div id="time-events">
-                <table class="uk-table uk-table-responsive uk-table-divider">
-                    <tbody>
-                        <tr id="weather-Forecast">
-                            <td></td>
-                        </tr>
-                </table>
+          </div>
+    <div class="container-md">100% wide until medium breakpoint
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-2">
+                    <div class="list-group" id="list-tab" role="tablist">
+                      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                    </div>
+                </div>
+              <div class="col-sm-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm" id="0">
+                            <div class="card inset-box mb-3" style="max-width: 18rem;">
+                                <div class="card-header text-white" id="header-0">Header</div>
+                                <div class="card-body ">
+                                  <h5 class="card-title" id="title-0">Primary card title</h5>
+                                  <p id="icon-0"></p>
+                                  <p class="card-text" id="p-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                              </div>
+                          </div>
+                      <div class="col-sm" id="1">
+                        <div class="card inset-box mb-3" style="max-width: 18rem;">
+                            <div class="card-header text-white" id="header-1">Header</div>
+                            <div class="card-body ">
+                              <h5 class="card-title" id="title-1">Primary card title</h5>
+                              <p id="icon-1"></p>
+                              <p class="card-text" id="p-1">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm" id="2">
+                        <div class="card inset-box mb-3" style="max-width: 18rem;">
+                            <div class="card-header text-white" id="header-2">Header</div>
+                            <div class="card-body ">
+                              <h5 class="card-title" id="title-2">Primary card title</h5>
+                              <p id="icon-2"></p>
+                              <p class="card-text" id="p-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm" id="3">
+                        <div class="card inset-box mb-3" style="max-width: 18rem;">
+                            <div class="card-header text-white" id="header-3">Header</div>
+                            <div class="card-body ">
+                              <h5 class="card-title" id="title-3">Primary card title</h5>
+                              <p id="icon-3"></p>
+                              <p class="card-text" id="p-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm" id="4">
+                        <div class="card inset-box mb-3" style="max-width: 18rem;">
+                            <div class="card-header text-white" id="header-4">Header</div>
+                            <div class="card-body ">
+                              <h5 class="card-title" id="title-4">Primary card title</h5>
+                              <p id="icon-4"></p>
+                              <p class="card-text" id="p-4">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
-        </div>
-    </div> -->
-
-
-
-
-
-
-
-<!-- <div class="uk-column-1-2@m uk-column-divider">
-    <div class="uk-container uk-container-small">
-        <div class="uk-section uk-section-primary">
-            <form>
-                <input class="uk-input uk-form-width-medium uk-form-large" id="citySearch" type="text" placeholder="Enter City">
-            </form>
-        </div>
     </div>
-    <div class="uk-container-large">
-    <span class="uk-column-span">
-        <div id="time-events">
-            <table class="uk-table uk-table-responsive uk-table-divider">
-                <tbody>
-                    <tr id="weather-Forecast">
-                        <td></td>
-                    </tr>
-            </table>
-        </div>
-    </span>
-</div>
-</div> -->
-
-<script src="assets/weather.js"></script>
+    <script src="assets/js-Monday-Feb9th.js"></script>
 </body>
 </html>

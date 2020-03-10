@@ -5,6 +5,17 @@ document.addEventListener("keypress", function(event){
         let cityName = document.getElementById("citySearch");
         queryCity = cityName.value;
     console.log("searched city: " + queryCity);
+/// CREATE NEW LIST ITEM ELEMENT //////
+
+let locationSearched = document.createElement("a");
+    $(locationSearched).attr("class","list-group-item list-group-item-action");
+    $(locationSearched).attr("data-toggle", "list");
+    $(locationSearched).attr("role", "tab");
+    $(locationSearched).attr("id", queryCity);
+    $(locationSearched).attr("aria-controls", queryCity);
+    $(locationSearched).text(queryCity);
+    $(".list-group").append(locationSearched);
+    localStorage.setItem(locationSearched, queryCity);
     let apiKey = "&key=bb0e6846266e46b2a313d522b2b4d2dd";
     let daysReq = "16";
     let unitDisplay = "&units=I"
